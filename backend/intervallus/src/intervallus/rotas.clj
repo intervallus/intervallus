@@ -14,6 +14,8 @@
   (GET "/api/trastes" [escala trastes]
     (processar escala trastes))
   (POST "/api/trastes" req
-    (let [{:strs [escala trastes]} (:body req)]
-      (processar escala trastes)))
+    (let [body (:body req)
+        escala (get body "escala")
+        trastes (get body "trastes")]
+    (processar escala trastes)))
   (route/not-found {:status 404 :body {:erro "Rota não encontrada"}}))
