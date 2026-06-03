@@ -92,6 +92,10 @@ Bash
 
         http://localhost:3000
 
+5. O servidor iniciará por padrão na porta 3000. Abra o seu navegador e acesse (para visualização json):
+
+        http://localhost:3000/api/trastes?escala=<value>&trastes=<value>
+
 
 ## **<span style="color:white;">Licença</span>**  
 ### Este projeto foi desenvolvido como parte do Projeto Integrador Interdisciplinar do Instituto Mauá de Tecnologia em parceria com o Metrô de São Paulo.
