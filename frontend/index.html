@@ -1,13 +1,69 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intervallus — Calculadora de Trastes</title>
+  <link rel="stylesheet" href="/frontend/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo-wrap">
+      <h1>Intervallus</h1>
+      <div class="subtitle">Calculadora de Trastes — Escala Igual Temperada</div>
+    </div>
+    <div class="tuning-pegs">
+      <div class="peg"></div>
+      <div class="peg"></div>
+      <div class="peg"></div>
+      <div class="peg"></div>
+      <div class="peg"></div>
+      <div class="peg"></div>
+    </div>
+  </header>
+
+  <div class="card" id="main-card">
+    <form class="form-panel" action="/trastes" method="get">
+
+      <div class="field">
+        <label for="escala">Escala (mm)</label>
+        <input type="number" id="escala" name="escala" min="400" max="1000" value="{{escala}}" placeholder="650">
+        <div class="unit">Entre 400 mm e 1000 mm</div>
+      </div>
+
+      <div class="field">
+        <label for="trastes">Nº de trastes</label>
+        <input type="number" id="trastes" name="trastes" min="1" max="36" value="{{trastes}}" placeholder="22">
+        <div class="unit">Padrão: 22</div>
+      </div>
+
+      <div class="presets">
+        <label>Presets comuns</label>
+        <div class="preset-btns">
+          <a class="preset-btn" href="/trastes?escala=628&trastes=19">Clássico 628</a>
+          <a class="preset-btn" href="/trastes?escala=650&trastes=22">Violão 650</a>
+          <a class="preset-btn" href="/trastes?escala=628.65&trastes=22">Fender Scale</a>
+          <a class="preset-btn" href="/trastes?escala=628.65&trastes=24">Gibson Scale</a>
+          <a class="preset-btn" href="/trastes?escala=700&trastes=24">Barítono</a>
+          <a class="preset-btn" href="/trastes?escala=432&trastes=20">Ukulele</a>
+        </div>
+      </div>
+
+      <button class="calc-btn" type="submit">Calcular</button>
+
+    </form>
+
+    <div class="error-bar" id="error-bar">{{erro}}</div>
+
+    <div id="result-area">
+      {{resultado}}
+    </div>
+  </div>
+
+  <footer>Regra dos 17,817 · Temperamento Igual · 12 tons por oitava</footer>
+</div>
+</body>
 </html>
