@@ -3,6 +3,7 @@
             [compojure.route :as route]
             [ring.util.response :refer [response content-type]]
             [clojure.string :as str]
+            [clojure.data.json :as json]
             [intervallus.calculos :as calc]))
 
 (def frontend-path "../../frontend")
@@ -75,5 +76,16 @@
   (GET "/frontend/css/style.css" []
     (-> (ring.util.response/file-response (str frontend-path "/css/style.css"))
         (content-type "text/css;charset=utf-8")))
+          
+(GET "/api/trastes" [escala trastes]
+    (let [L (try (Double/parseDouble (str escala)) (catch Exception _ nil))
+          n (or (try (Integer/parseInt (str trastes)) (catch Exception _ nil)) 22)]
+      (if L
+        (let [dados (calc/calcular L n)]
+          (-> (response (json/write-str dados))
+              (content-type "application/json;charset=utf-8")))
+        (-> (response (json/write-str {:erro "Escala inválida"})) 
+            (content-type "application/json;charset=utf-8")
+            (ring.util.response/status 400)))))
 
   (route/not-found "Página não encontrada"))
